@@ -1,7 +1,7 @@
 {% if students %}
     <ul>
     {% for student in students %}
-        <li><a href="/polls/student/{{ student.id }}/">{{ student.name }}</a></li>
+        <li><a href="{% url 'polls:student_detail' student.id %}">{{ student.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
