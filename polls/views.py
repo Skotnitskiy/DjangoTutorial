@@ -10,6 +10,6 @@ def students(request, group_name):
 
 
 def student_detail(request, student_id):
-    student = Student.objects.filter(id=student_id).first()
+    student = Student.objects.filter(pk=student_id).first()
     context = {'student': student}
     return render(request, 'polls/student_detail.html', context)
