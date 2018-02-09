@@ -1,7 +1,19 @@
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
 {% if students %}
-    <ul>
+    <ul class="list-group">
         {% for student in students %}
-            <li><a href="{% url 'polls:student_detail' student.id %}">{{ student.name }}</a></li>
+            <li class="list-group-item">
+                <a
+                        href="{% url 'polls:student_detail' student.id %}">
+                    {{ student.name }}
+                </a>
+            </li>
         {% endfor %}
     </ul>
 {% else %}
@@ -10,11 +22,14 @@
 
 <form action="{% url 'polls:add_student'%}" method="post">
     {% csrf_token %}
-    <input type="text" name="name" title="name"/><br/>
-    <select name="group" title="group"><br/>
+    <label for="studentName">Name:</label>
+    <input type="text" name="name" title="name" class="form-control" id="studentName"
+           placeholder="Full name">
+    <label for="groupSelect">Group name:</label>
+    <select name="group" class="form-control" id="groupSelect" title="group">
         {% for group in groups %}
             <option value="{{ group.id }}">{{ group.group_name }}</option>
         {% endfor %}
     </select>
-    <input type="submit" value="add_student" />
+    <input type="submit" class="btn btn-outline-success" value="Add" />
 </form>
