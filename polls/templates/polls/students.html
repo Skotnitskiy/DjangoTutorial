@@ -1,9 +1,20 @@
 {% if students %}
     <ul>
-    {% for student in students %}
-        <li><a href="{% url 'polls:student_detail' student.id %}">{{ student.name }}</a></li>
-    {% endfor %}
+        {% for student in students %}
+            <li><a href="{% url 'polls:student_detail' student.id %}">{{ student.name }}</a></li>
+        {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+<form action="{% url 'polls:add_student'%}" method="post">
+    {% csrf_token %}
+    <input type="text" name="name" title="name"/><br/>
+    <select name="group" title="group"><br/>
+        {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.group_name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="add_student" />
+</form>
